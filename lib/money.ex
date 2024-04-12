@@ -17,6 +17,10 @@ defmodule Money do
   def new(amount, currency) when is_integer(amount) and currency in @supported_currencies,
     do: struct(__MODULE__, amount: amount, currency: currency)
 
+  @spec zero?(t) :: boolean()
+  def zero?(%__MODULE__{amount: 0}), do: true
+  def zero?(%__MODULE__{amount: _}), do: false
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
   # operations: add, mul, div, sub, convert
