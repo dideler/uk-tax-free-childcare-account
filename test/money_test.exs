@@ -46,4 +46,12 @@ defmodule MoneyTest do
     refute Money.lt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.lt?(%Money{amount: 1, currency: :USD}, %Money{amount: 2, currency: :GBP})
   end
+
+  test "lte?/2" do
+    assert Money.lte?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
+    assert Money.lte?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+    refute Money.lte?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+    refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 2, currency: :GBP})
+    refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
+  end
 end
