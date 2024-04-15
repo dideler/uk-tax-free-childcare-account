@@ -18,10 +18,13 @@ defmodule Money do
     do: struct(__MODULE__, amount: amount, currency: currency)
 
   @spec zero?(t) :: boolean()
-  def zero?(%__MODULE__{amount: a}), do: a === 0
+  def zero?(%__MODULE__{amount: amount}), do: amount === 0
 
   @spec positive?(t) :: boolean()
-  def positive?(%__MODULE__{amount: a}), do: a > 0
+  def positive?(%__MODULE__{amount: amount}), do: amount > 0
+
+  @spec negative?(t) :: boolean()
+  def negative?(%__MODULE__{amount: amount}), do: amount < 0
 
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare

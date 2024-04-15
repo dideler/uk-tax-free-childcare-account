@@ -12,4 +12,10 @@ defmodule MoneyTest do
     refute Money.positive?(%Money{amount: 0})
     refute Money.positive?(%Money{amount: -1})
   end
+
+  test "negative?/1" do
+    assert Money.negative?(%Money{amount: -1})
+    refute Money.negative?(%Money{amount: 0})
+    refute Money.negative?(%Money{amount: 1})
+  end
 end
