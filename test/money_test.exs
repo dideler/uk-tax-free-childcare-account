@@ -65,4 +65,10 @@ defmodule MoneyTest do
     assert :gt == Money.compare(%Money{amount: 2}, %Money{amount: 1})
     assert :lt == Money.compare(%Money{amount: 1}, %Money{amount: 2})
   end
+
+  test "compare/2 with incompatible currencies" do
+    assert_raise Money.CurrencyError, "Currencies GBP and USD are not compatible", fn ->
+      Money.compare(%Money{currency: :GBP}, %Money{currency: :USD})
+    end
+  end
 end

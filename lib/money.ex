@@ -2,6 +2,7 @@ defmodule Money do
   @moduledoc """
   Represents money as integer values internally for safer operations
   """
+  alias Money.CurrencyError
 
   @type t :: %__MODULE__{
           amount: integer,
@@ -58,6 +59,16 @@ defmodule Money do
       a1 === a2 -> :eq
       a1 > a2 -> :gt
       a1 < a2 -> :lt
+    end
+  end
+
+  def compare(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
+
+  defmodule CurrencyError do
+    defexception [:m1, :m2]
+
+    def message(exception) do
+      "Currencies #{exception.m1.currency} and #{exception.m2.currency} are not compatible"
     end
   end
 
