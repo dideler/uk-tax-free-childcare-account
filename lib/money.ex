@@ -29,6 +29,9 @@ defmodule Money do
   @spec equals?(t, t) :: boolean()
   def equals?(%Money{} = m1, %Money{} = m2), do: m1 === m2
 
+  @spec not_equals?(t, t) :: boolean()
+  def not_equals?(%Money{} = m1, %Money{} = m2), do: m1 !== m2
+
   @spec gt?(t, t) :: boolean()
   def gt?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 > a2
   def gt?(%Money{}, %Money{}), do: false
