@@ -45,6 +45,15 @@ defmodule Money do
   def lte?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 <= a2
   def lte?(%Money{}, %Money{}), do: false
 
+  @spec compare(t, t) :: :eq | :gt | :lt
+  def compare(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}) do
+    cond do
+      a1 === a2 -> :eq
+      a1 > a2 -> :gt
+      a1 < a2 -> :lt
+    end
+  end
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
   # operations: add, mul, div, sub, convert

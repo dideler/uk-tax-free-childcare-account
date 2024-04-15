@@ -54,4 +54,10 @@ defmodule MoneyTest do
     refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 2, currency: :GBP})
     refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
+
+  test "compare/2" do
+    assert :eq == Money.compare(%Money{amount: 1}, %Money{amount: 1})
+    assert :gt == Money.compare(%Money{amount: 2}, %Money{amount: 1})
+    assert :lt == Money.compare(%Money{amount: 1}, %Money{amount: 2})
+  end
 end
