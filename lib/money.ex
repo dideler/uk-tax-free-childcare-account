@@ -21,6 +21,9 @@ defmodule Money do
   def zero?(%__MODULE__{amount: 0}), do: true
   def zero?(%__MODULE__{amount: _}), do: false
 
+  @spec positive?(t) :: boolean()
+  def positive?(%__MODULE__{amount: a}), do: a > 0
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
   # operations: add, mul, div, sub, convert
