@@ -25,10 +25,14 @@ defmodule MoneyTest do
     refute Money.equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
   end
 
+  test "equals?/2 with incompatible currencies"
+
   test "not_equals?/2" do
     assert Money.not_equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.not_equals?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
   end
+
+  test "not_equals?/2 with incompatible currencies"
 
   test "gt?/2" do
     assert Money.gt?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
@@ -36,6 +40,8 @@ defmodule MoneyTest do
     refute Money.gt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.gt?(%Money{amount: 2, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
+
+  test "gt?/2 with incompatible currencies"
 
   test "gte?/2" do
     assert Money.gte?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
@@ -45,12 +51,16 @@ defmodule MoneyTest do
     refute Money.gte?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
 
+  test "gte?/2 with incompatible currencies"
+
   test "lt?/2" do
     assert Money.lt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
     refute Money.lt?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.lt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.lt?(%Money{amount: 1, currency: :USD}, %Money{amount: 2, currency: :GBP})
   end
+
+  test "lt?/2 with incompatible currencies"
 
   test "lte?/2" do
     assert Money.lte?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
@@ -59,6 +69,8 @@ defmodule MoneyTest do
     refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 2, currency: :GBP})
     refute Money.lte?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
+
+  test "lte?/2 with incompatible currencies"
 
   test "compare/2" do
     assert :eq == Money.compare(%Money{amount: 1}, %Money{amount: 1})
