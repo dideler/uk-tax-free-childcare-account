@@ -22,15 +22,19 @@ defmodule Money do
 
   @spec positive?(t) :: boolean()
   def positive?(%Money{amount: amount}), do: amount > 0
+  def pos?(m), do: positive?(m)
 
   @spec negative?(t) :: boolean()
   def negative?(%Money{amount: amount}), do: amount < 0
+  def neg?(m), do: negative?(m)
 
   @spec equals?(t, t) :: boolean()
   def equals?(%Money{} = m1, %Money{} = m2), do: m1 === m2
+  def eq?(m1, m2), do: equals?(m1, m2)
 
   @spec not_equals?(t, t) :: boolean()
   def not_equals?(%Money{} = m1, %Money{} = m2), do: m1 !== m2
+  def ne?(m1, m2), do: not_equals?(m1, m2)
 
   @spec gt?(t, t) :: boolean()
   def gt?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 > a2
