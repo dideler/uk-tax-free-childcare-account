@@ -21,7 +21,14 @@ defmodule MoneyTest do
 
   test "equals?/2" do
     assert Money.equals?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
-    refute Money.equals?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :USD})
+    refute Money.equals?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
     refute Money.equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+  end
+
+  test "gt?/2" do
+    assert Money.gt?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+    refute Money.gt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
+    refute Money.gt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+    refute Money.gt?(%Money{amount: 2, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
 end

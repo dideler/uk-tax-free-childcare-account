@@ -29,6 +29,10 @@ defmodule Money do
   @spec equals?(t, t) :: boolean()
   def equals?(%__MODULE__{} = m1, %__MODULE__{} = m2), do: m1 === m2
 
+  @spec gt?(t, t) :: boolean()
+  def gt?(%__MODULE__{amount: a1, currency: c}, %__MODULE__{amount: a2, currency: c}), do: a1 > a2
+  def gt?(%__MODULE__{}, %__MODULE__{}), do: false
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
   # operations: add, mul, div, sub, convert
