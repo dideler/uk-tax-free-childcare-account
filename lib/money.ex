@@ -33,6 +33,10 @@ defmodule Money do
   def gt?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 > a2
   def gt?(%Money{}, %Money{}), do: false
 
+  @spec gte?(t, t) :: boolean()
+  def gte?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 >= a2
+  def gte?(%Money{}, %Money{}), do: false
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
   # operations: add, mul, div, sub, convert
