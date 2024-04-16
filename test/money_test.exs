@@ -91,6 +91,12 @@ defmodule MoneyTest do
     end
   end
 
+  test "abs/1" do
+    assert %Money{amount: 5} = Money.abs(%Money{amount: -5})
+    assert %Money{amount: 0} = Money.abs(%Money{amount: 0})
+    assert %Money{amount: 2} = Money.abs(%Money{amount: 2})
+  end
+
   test "add/2" do
     assert %Money{amount: 10} = Money.add(%Money{amount: 5}, %Money{amount: 5})
   end

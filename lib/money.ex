@@ -64,6 +64,10 @@ defmodule Money do
 
   def compare(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
+  @spec abs(t) :: t
+  def abs(%Money{amount: a} = m) when a < 0, do: %Money{m | amount: -a}
+  def abs(%Money{} = m), do: m
+
   @spec add(t, t) :: t
   def add(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}) do
     %Money{amount: a1 + a2, currency: c}
