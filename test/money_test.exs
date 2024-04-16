@@ -25,14 +25,10 @@ defmodule MoneyTest do
     refute Money.equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
   end
 
-  test "equals?/2 with incompatible currencies"
-
   test "not_equals?/2" do
     assert Money.not_equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.not_equals?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
   end
-
-  test "not_equals?/2 with incompatible currencies"
 
   test "gt?/2" do
     assert Money.gt?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
