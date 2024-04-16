@@ -51,7 +51,7 @@ defmodule Money do
 
   @spec lte?(t, t) :: boolean()
   def lte?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 <= a2
-  def lte?(%Money{}, %Money{}), do: false
+  def lte?(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
   @spec compare(t, t) :: :eq | :gt | :lt
   def compare(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}) do
