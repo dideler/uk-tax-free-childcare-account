@@ -27,6 +27,7 @@ defmodule MoneyTest do
 
   test "not_equals?/2" do
     assert Money.not_equals?(%Money{amount: 0, currency: :GBP}, %Money{amount: 1, currency: :GBP})
+    assert Money.not_equals?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
     refute Money.not_equals?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
   end
 
