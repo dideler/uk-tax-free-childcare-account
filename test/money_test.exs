@@ -100,4 +100,14 @@ defmodule MoneyTest do
       Money.add(%Money{currency: :GBP}, %Money{currency: :USD})
     end
   end
+
+  test "sub/2" do
+    assert %Money{amount: -5} = Money.sub(%Money{amount: 0}, %Money{amount: 5})
+  end
+
+  test "sub/2 with incompatible currencies" do
+    assert_raise Money.CurrencyError, "Currencies GBP and USD are not compatible", fn ->
+      Money.sub(%Money{currency: :GBP}, %Money{currency: :USD})
+    end
+  end
 end

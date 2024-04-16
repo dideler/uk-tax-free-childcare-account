@@ -71,6 +71,13 @@ defmodule Money do
 
   def add(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
+  @spec sub(t, t) :: t
+  def sub(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}) do
+    %Money{amount: a1 - a2, currency: c}
+  end
+
+  def sub(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
+
   defmodule CurrencyError do
     defexception [:m1, :m2]
 
