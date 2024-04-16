@@ -47,11 +47,13 @@ defmodule MoneyTest do
     assert Money.gte?(%Money{amount: 2, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     assert Money.gte?(%Money{amount: 1, currency: :GBP}, %Money{amount: 1, currency: :GBP})
     refute Money.gte?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
-    refute Money.gte?(%Money{amount: 2, currency: :USD}, %Money{amount: 1, currency: :GBP})
-    refute Money.gte?(%Money{amount: 1, currency: :USD}, %Money{amount: 1, currency: :GBP})
   end
 
-  test "gte?/2 with incompatible currencies"
+  test "gte?/2 with incompatible currencies" do
+    assert_raise Money.CurrencyError, "Currencies GBP and USD are not compatible", fn ->
+      Money.gte?(%Money{currency: :GBP}, %Money{currency: :USD})
+    end
+  end
 
   test "lt?/2" do
     assert Money.lt?(%Money{amount: 1, currency: :GBP}, %Money{amount: 2, currency: :GBP})
