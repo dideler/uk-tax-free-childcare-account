@@ -80,7 +80,7 @@ defmodule Money do
   end
 
   # initialise: new, parse
-  # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, compare
-  # operations: add, mul, div, sub, convert
+  # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
+  # operations: add, mul, div, sub, abs, convert, compare
   # presenters: symbol, name, to_s/to_string
 end
