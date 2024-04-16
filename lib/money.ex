@@ -39,7 +39,7 @@ defmodule Money do
 
   @spec gt?(t, t) :: boolean()
   def gt?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 > a2
-  def gt?(%Money{}, %Money{}), do: false
+  def gt?(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
   @spec gte?(t, t) :: boolean()
   def gte?(%Money{amount: a1, currency: c}, %Money{amount: a2, currency: c}), do: a1 >= a2
