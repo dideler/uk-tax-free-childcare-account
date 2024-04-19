@@ -116,4 +116,14 @@ defmodule MoneyTest do
       Money.sub(%Money{currency: :GBP}, %Money{currency: :USD})
     end
   end
+
+  test "mul/2" do
+    assert %Money{amount: 0} = Money.mul(%Money{amount: 0}, 2)
+    assert %Money{amount: 0} = Money.mul(%Money{amount: 2}, 0)
+    assert %Money{amount: 4} = Money.mul(%Money{amount: 2}, 2)
+    assert %Money{amount: 5} = Money.mul(%Money{amount: 2}, 2.5)
+    assert %Money{amount: 3} = Money.mul(%Money{amount: 2}, 1.333)
+    assert %Money{amount: 267} = Money.mul(%Money{amount: 200}, 1.333)
+    assert %Money{amount: 267} = Money.mul(%Money{amount: 200}, 1.335)
+  end
 end

@@ -4,6 +4,14 @@ defmodule Money do
   """
   alias Money.CurrencyError
 
+  defmodule CurrencyError do
+    defexception [:m1, :m2]
+
+    def message(exception) do
+      "Currencies #{exception.m1.currency} and #{exception.m2.currency} are not compatible"
+    end
+  end
+
   @type t :: %__MODULE__{
           amount: integer,
           currency: atom
@@ -82,12 +90,9 @@ defmodule Money do
 
   def sub(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
-  defmodule CurrencyError do
-    defexception [:m1, :m2]
-
-    def message(exception) do
-      "Currencies #{exception.m1.currency} and #{exception.m2.currency} are not compatible"
-    end
+  @spec mul(t, number) :: t
+  def mul(%Money{amount: a, currency: c}, mul) when is_number(mul) do
+    %Money{amount: round(a * mul), currency: c}
   end
 
   # initialise: new, parse
