@@ -126,4 +126,17 @@ defmodule MoneyTest do
     assert %Money{amount: 267} = Money.mul(%Money{amount: 200}, 1.333)
     assert %Money{amount: 267} = Money.mul(%Money{amount: 200}, 1.335)
   end
+
+  test "div/2" do
+    assert %Money{amount: 0} = Money.div(%Money{amount: 0}, 2)
+    assert %Money{amount: 2} = Money.div(%Money{amount: 4}, 2)
+    assert %Money{amount: 3} = Money.div(%Money{amount: 5}, 2)
+    assert %Money{amount: 1} = Money.div(%Money{amount: 2}, 1.5)
+  end
+
+  test "div/2 when dividing by 0" do
+    assert_raise ArithmeticError, "Division by zero is not a number", fn ->
+      Money.div(%Money{}, 0)
+    end
+  end
 end

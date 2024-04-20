@@ -91,12 +91,20 @@ defmodule Money do
   def sub(%Money{} = m1, %Money{} = m2), do: raise(CurrencyError, m1: m1, m2: m2)
 
   @spec mul(t, number) :: t
-  def mul(%Money{amount: a, currency: c}, mul) when is_number(mul) do
-    %Money{amount: round(a * mul), currency: c}
+  def mul(%Money{amount: a, currency: c}, multiplier) when is_number(multiplier) do
+    %Money{amount: round(a * multiplier), currency: c}
+  end
+
+  @spec div(t, number) :: t
+  def div(%Money{}, 0), do: raise(ArithmeticError, "Division by zero is not a number")
+  def div(%Money{}, 0.0), do: raise(ArithmeticError, "Division by zero is not a number")
+
+  def div(%Money{amount: a, currency: c}, divisor) when is_number(divisor) do
+    %Money{amount: round(a / divisor), currency: c}
   end
 
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
-  # operations: add, mul, div, sub, abs, convert, compare
+  # operations: add, mul, div, sub, abs, convert, compare, split
   # presenters: symbol, name, to_s/to_string
 end
