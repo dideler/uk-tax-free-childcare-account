@@ -97,7 +97,7 @@ defmodule Money do
 
   @spec div(t, number) :: t
   def div(%Money{}, 0), do: raise(ArithmeticError, "Division by zero is not a number")
-  def div(%Money{}, 0.0), do: raise(ArithmeticError, "Division by zero is not a number")
+  def div(%Money{}, +0.0), do: raise(ArithmeticError, "Division by zero is not a number")
 
   def div(%Money{amount: a, currency: c}, divisor) when is_number(divisor) do
     %Money{amount: round(a / divisor), currency: c}
