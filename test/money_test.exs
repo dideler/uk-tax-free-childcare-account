@@ -159,4 +159,31 @@ defmodule MoneyTest do
       Money.split(%Money{}, 0.5)
     end
   end
+
+  test "convert/3" do
+    m = %Money{amount: 100, currency: :USD}
+    assert %Money{amount: 81, currency: :GBP} = Money.convert(m, {:USD, :GBP, 0.809581})
+  end
+
+  test "convert/3 when exchange invalid" do
+    assert_raise ArgumentError, "Exchange rate invalid", fn ->
+      Money.convert(%Money{currency: :USD}, {:USD, :USD, 1})
+    end
+
+    assert_raise ArgumentError, "Exchange rate invalid", fn ->
+      Money.convert(%Money{currency: :USD}, {:GBP, :USD, 1})
+    end
+
+    assert_raise ArgumentError, "Exchange rate invalid", fn ->
+      Money.convert(%Money{currency: :USD}, {:USD, :FOO, 1})
+    end
+
+    assert_raise ArgumentError, "Exchange rate invalid", fn ->
+      Money.convert(%Money{currency: :USD}, {:USD, :GBP, 0})
+    end
+
+    assert_raise ArgumentError, "Exchange rate invalid", fn ->
+      Money.convert(%Money{currency: :USD}, {:USD, :GBP, -1})
+    end
+  end
 end

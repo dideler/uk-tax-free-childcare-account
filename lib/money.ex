@@ -121,6 +121,16 @@ defmodule Money do
 
   def split(%Money{}, _), do: raise(ArithmeticError)
 
+  @spec convert(t, {currency, currency, number}) :: t
+  def convert(%Money{}, {from, from, _rate}), do: raise(ArgumentError, "Exchange rate invalid")
+
+  def convert(%Money{currency: from} = m, {from, to, rate})
+      when to in @supported_currencies and rate > 0 do
+    mul(%Money{m | currency: to}, rate)
+  end
+
+  def convert(%Money{}, _exchange_rate), do: raise(ArgumentError, "Exchange rate invalid")
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split
