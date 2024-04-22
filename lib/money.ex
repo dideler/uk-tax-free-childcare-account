@@ -12,14 +12,22 @@ defmodule Money do
     end
   end
 
+  @supported_currencies ~w(GBP USD)a
+
+  @type currency ::
+          unquote(
+            @supported_currencies
+            |> Enum.map(&inspect/1)
+            |> Enum.join(" | ")
+            |> Code.string_to_quoted!()
+          )
+
   @type t :: %__MODULE__{
           amount: integer,
-          currency: atom
+          currency: currency
         }
 
   defstruct amount: 0, currency: :GBP
-
-  @supported_currencies ~w(GBP)a
 
   def new(amount) when is_integer(amount), do: struct(__MODULE__, amount: amount)
 
