@@ -103,6 +103,16 @@ defmodule Money do
     %Money{amount: round(a / divisor), currency: c}
   end
 
+  @spec split(t, pos_integer) :: [t]
+  def split(%Money{} = m, 1), do: [m]
+
+  def split(%Money{amount: a} = m, n) when is_integer(n) and n > 0 do
+    [%Money{amount: head_a} | tail] = for _ <- 1..n, do: %Money{m | amount: Kernel.div(a, n)}
+    [%Money{m | amount: head_a + rem(a, n)} | tail]
+  end
+
+  def split(%Money{}, _), do: raise(ArithmeticError)
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split
