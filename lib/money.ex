@@ -136,6 +136,9 @@ defmodule Money do
   def currency_name(%Money{currency: :GBP}), do: "Sterling"
   def currency_name(%Money{currency: :USD}), do: "United States dollar"
 
+  def symbol(%Money{currency: :GBP}), do: "£"
+  def symbol(%Money{currency: :USD}), do: "$"
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split

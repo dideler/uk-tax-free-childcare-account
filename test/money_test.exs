@@ -196,4 +196,9 @@ defmodule MoneyTest do
     assert "United States dollar" == Money.currency_name(%Money{currency: :USD})
     assert "Sterling" == Money.currency_name(%Money{currency: :GBP})
   end
+
+  test "symbol/1" do
+    assert "$" == Money.symbol(%Money{currency: :USD})
+    assert "£" == Money.symbol(%Money{currency: :GBP})
+  end
 end
