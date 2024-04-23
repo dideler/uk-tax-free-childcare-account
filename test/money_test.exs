@@ -1,6 +1,13 @@
 defmodule MoneyTest do
   use ExUnit.Case
 
+  import Money
+
+  test "sigil" do
+    assert %Money{amount: 100, currency: :GBP} == ~M[100]
+    assert %Money{amount: 100, currency: :USD} == ~M[100]USD
+  end
+
   test "zero?/1" do
     assert Money.zero?(%Money{amount: 0})
     refute Money.zero?(%Money{amount: 1})

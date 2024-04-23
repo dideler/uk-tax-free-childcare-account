@@ -29,6 +29,13 @@ defmodule Money do
 
   defstruct amount: 0, currency: :GBP
 
+  @doc "Create Money structs with the ~M sigil. Requires 'import Money' to use sigil."
+  def sigil_M(amount_raw, []), do: new(String.to_integer(amount_raw))
+
+  def sigil_M(amount_raw, currency_raw) do
+    new(String.to_integer(amount_raw), List.to_string(currency_raw) |> String.to_atom())
+  end
+
   def new(amount) when is_integer(amount), do: struct(__MODULE__, amount: amount)
 
   def new(amount, currency) when is_integer(amount) and currency in @supported_currencies,
