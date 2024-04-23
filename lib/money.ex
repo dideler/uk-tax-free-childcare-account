@@ -133,6 +133,9 @@ defmodule Money do
 
   def currency_code(%Money{currency: c}), do: to_string(c)
 
+  def currency_name(%Money{currency: :GBP}), do: "Sterling"
+  def currency_name(%Money{currency: :USD}), do: "United States dollar"
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split
