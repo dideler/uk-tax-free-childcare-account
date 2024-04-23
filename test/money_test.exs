@@ -186,4 +186,9 @@ defmodule MoneyTest do
       Money.convert(%Money{currency: :USD}, {:USD, :GBP, -1})
     end
   end
+
+  test "currency_code/1" do
+    assert "USD" == Money.currency_code(%Money{currency: :USD})
+    assert "GBP" == Money.currency_code(%Money{currency: :GBP})
+  end
 end

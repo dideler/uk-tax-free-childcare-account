@@ -131,6 +131,8 @@ defmodule Money do
 
   def convert(%Money{}, _exchange_rate), do: raise(ArgumentError, "Exchange rate invalid")
 
+  def currency_code(%Money{currency: c}), do: to_string(c)
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split
