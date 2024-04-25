@@ -144,8 +144,9 @@ defmodule Money do
   def currency_name(:GBP), do: "Sterling"
   def currency_name(:USD), do: "United States dollar"
 
-  def currency_symbol(%Money{currency: :GBP}), do: "£"
-  def currency_symbol(%Money{currency: :USD}), do: "$"
+  def currency_symbol(%Money{currency: c}), do: currency_symbol(c)
+  def currency_symbol(:GBP), do: "£"
+  def currency_symbol(:USD), do: "$"
 
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
