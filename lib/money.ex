@@ -138,7 +138,7 @@ defmodule Money do
 
   def convert(%Money{}, _exchange_rate), do: raise(ArgumentError, "Exchange rate invalid")
 
-  def currency_code(%Money{currency: c}), do: to_string(c)
+  def currency_code(%Money{currency: c}), do: Kernel.to_string(c)
 
   def currency_name(%Money{currency: :GBP}), do: "Sterling"
   def currency_name(%Money{currency: :USD}), do: "United States dollar"
