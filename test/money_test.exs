@@ -204,8 +204,8 @@ defmodule MoneyTest do
     assert "Sterling" == Money.currency_name(%Money{currency: :GBP})
   end
 
-  test "symbol/1" do
-    assert "$" == Money.symbol(%Money{currency: :USD})
-    assert "£" == Money.symbol(%Money{currency: :GBP})
+  test "currency_symbol/1" do
+    assert "$" == Money.currency_symbol(%Money{currency: :USD})
+    assert "£" == Money.currency_symbol(%Money{currency: :GBP})
   end
 end
