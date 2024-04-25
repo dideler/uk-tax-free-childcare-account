@@ -140,8 +140,9 @@ defmodule Money do
 
   def currency_code(%Money{currency: c}), do: Kernel.to_string(c)
 
-  def currency_name(%Money{currency: :GBP}), do: "Sterling"
-  def currency_name(%Money{currency: :USD}), do: "United States dollar"
+  def currency_name(%Money{currency: c}), do: currency_name(c)
+  def currency_name(:GBP), do: "Sterling"
+  def currency_name(:USD), do: "United States dollar"
 
   def symbol(%Money{currency: :GBP}), do: "£"
   def symbol(%Money{currency: :USD}), do: "$"
