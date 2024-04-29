@@ -148,8 +148,36 @@ defmodule Money do
   def currency_symbol(:GBP), do: "£"
   def currency_symbol(:USD), do: "$"
 
+  @spec to_string(t) :: binary
+  def to_string(%Money{amount: amount, currency: currency}) do
+    digits =
+      amount
+      |> Kernel.abs()
+      |> Kernel.to_string()
+      |> String.graphemes()
+      |> Enum.reverse()
+      |> Enum.with_index()
+
+    formatted_digits = digits(digits, []) |> Enum.join()
+    polarity = if amount < 0, do: "-", else: ""
+    polarity <> currency_symbol(currency) <> formatted_digits
+  end
+
+  defp digits([], [_] = acc), do: ["0", ".", "0" | acc]
+  defp digits([], [_, _] = acc), do: ["0", "." | acc]
+  defp digits([], acc), do: acc
+  defp digits([{digit, _} | rem], [_, _] = acc), do: digits(rem, [digit, "." | acc])
+
+  defp digits([{digit, i} | rem], acc) do
+    if rem(i, 3) == 2 do
+      digits(rem, [digit, "," | acc])
+    else
+      digits(rem, [digit | acc])
+    end
+  end
+
   # initialise: new, parse
   # predicates: equals?, zero?, positive?, negative?, gt?, lt? ge?/gte? le?/lte? eq? ne?, pos?, neg?
   # operations: add, mul, div, sub, abs, convert, compare, split
-  # presenters: symbol, name, to_s/to_string
+  # presenters: symbol, name, code, to_s/to_string
 end

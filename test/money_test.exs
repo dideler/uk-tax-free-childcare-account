@@ -208,4 +208,21 @@ defmodule MoneyTest do
     assert "$" == Money.currency_symbol(%Money{currency: :USD})
     assert "£" == Money.currency_symbol(%Money{currency: :GBP})
   end
+
+  test "to_string/1" do
+    assert "$0.00" == Money.to_string(%Money{amount: 0, currency: :USD})
+    assert "$0.00" == Money.to_string(%Money{amount: -0, currency: :USD})
+    assert "$0.05" == Money.to_string(%Money{amount: 5, currency: :USD})
+    assert "$0.05" == Money.to_string(%Money{amount: 05, currency: :USD})
+    assert "$0.50" == Money.to_string(%Money{amount: 50, currency: :USD})
+    assert "$1.50" == Money.to_string(%Money{amount: 150, currency: :USD})
+    assert "$15.00" == Money.to_string(%Money{amount: 1500, currency: :USD})
+    assert "$150.00" == Money.to_string(%Money{amount: 15000, currency: :USD})
+    assert "£1,234.56" == Money.to_string(%Money{amount: 123_456, currency: :GBP})
+    assert "£1,234,567.89" == Money.to_string(%Money{amount: 123_456_789, currency: :GBP})
+    assert "-£0.09" == Money.to_string(%Money{amount: -9, currency: :GBP})
+    assert "-£0.99" == Money.to_string(%Money{amount: -99, currency: :GBP})
+    assert "-£9.99" == Money.to_string(%Money{amount: -999, currency: :GBP})
+    assert "-£99.99" == Money.to_string(%Money{amount: -9999, currency: :GBP})
+  end
 end
