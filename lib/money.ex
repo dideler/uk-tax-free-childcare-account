@@ -163,6 +163,8 @@ defmodule Money do
     polarity <> currency_symbol(currency) <> formatted_digits
   end
 
+  def to_s(m), do: Money.to_string(m)
+
   defp digits([], [_] = acc), do: ["0", ".", "0" | acc]
   defp digits([], [_, _] = acc), do: ["0", "." | acc]
   defp digits([], [_, _, _ | _] = acc), do: acc
