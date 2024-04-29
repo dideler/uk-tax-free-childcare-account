@@ -165,7 +165,7 @@ defmodule Money do
 
   defp digits([], [_] = acc), do: ["0", ".", "0" | acc]
   defp digits([], [_, _] = acc), do: ["0", "." | acc]
-  defp digits([], acc), do: acc
+  defp digits([], [_, _, _ | _] = acc), do: acc
   defp digits([{digit, _} | rem], [_, _] = acc), do: digits(rem, [digit, "." | acc])
 
   defp digits([{digit, i} | rem], acc) do
