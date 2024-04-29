@@ -225,4 +225,8 @@ defmodule MoneyTest do
     assert "-£9.99" == Money.to_string(%Money{amount: -999, currency: :GBP})
     assert "-£99.99" == Money.to_string(%Money{amount: -9999, currency: :GBP})
   end
+
+  test "String.Chars protocol" do
+    assert "$1.99" == Kernel.to_string(%Money{amount: 199, currency: :USD})
+  end
 end

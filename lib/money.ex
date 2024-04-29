@@ -183,3 +183,7 @@ defmodule Money do
   # operations: add, mul, div, sub, abs, convert, compare, split
   # presenters: symbol, name, code, to_s/to_string
 end
+
+defimpl String.Chars, for: Money do
+  def to_string(m), do: Money.to_string(m)
+end
