@@ -14,9 +14,36 @@ The user must enter the amount due, account balance, the remaining eligible bonu
 These figures will be available on your [childcare accounts](https://www.gov.uk/sign-in-childcare-account).
 
 ### TODO
+- Move to a livebook with kino ui
 - Use safer money representation (money dep or build own module as a fun exercise)
+  - See if it fixes this edge case rounding
+  ```
+  iex(1)> account = Childcare.Account.new(due: 906.10, bal: 209.52, rem: 290.48, rat: {8,2})
+  %Childcare.Account{due: 906.1, bal: 209.52, rem: 290.48, rat: {8, 2}}
+  iex(2)> Childcare.Account.PayInRecommender.suggest_pay_in(account, strat: :min_pay)
+  {558.58,
+   %Childcare.Account{
+     due: 906.1,
+     bal: 906.1,
+     rem: 152.48000000000002,
+     rat: {8, 2}
+   }}
+  ```
+  - See if it fixes this bug as well
+  ```
+  iex(1)> account = Childcare.Account.new(due: 838.10, bal: 755.81, rem: 0, rat: {8,2})
+  %Childcare.Account{due: 838.1, bal: 755.81, rem: 0, rat: {8, 2}}
+  iex(2)> Childcare.Account.PayInRecommender.suggest_pay_in(account, strat: :max_bonus)
+  {82.29000000000008,
+  %Childcare.Account{due: 838.1, bal: 838.1, rem: 0.0, rat: {8, 2}}}
+  iex(3)> Childcare.Account.PayInRecommender.suggest_pay_in(account, strat: :min_pay)
+  # gets stuck with high cpu
+  ```
 - Add support for multiple dues
 - Add a basic frontend
+  - Kino for Livebook
+  - https://github.com/livebook-dev/kino
+  - https://gist.github.com/hugobarauna/018e1e487499249090bb30ed985eb764
 
 ### Example usage
 
