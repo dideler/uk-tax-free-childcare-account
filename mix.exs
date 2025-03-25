@@ -21,7 +21,7 @@ defmodule UkTaxFreeChildcare.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:money, github: "dideler/money.ex"}
+      {:money, github: "dideler/money.ex", branch: "main"}
     ]
   end
 end
