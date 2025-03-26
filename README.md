@@ -21,6 +21,7 @@ These figures will be available on your [childcare accounts](https://www.gov.uk/
 ### Example usage
 
 ```elixir
+mix deps.get
 iex -S mix
 
 account = Childcare.Account.new(due: 1000.00, bal: 361.25, rem: 138.75, rat: {8,2})
