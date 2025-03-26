@@ -1,0 +1,61 @@
+# UkTaxFreeChildcare Livebook
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.15"},
+  {:uk_tax_free_childcare, github: "dideler/uk-tax-free-childcare-account"}
+])
+```
+
+## User-specific events (data not shared between Livebook users)
+
+```elixir
+form = Kino.Control.form(
+  [
+    child_name: Kino.Input.text("Child's Name"),
+    amount_due: Kino.Input.number("Amount Due (£)"),
+    balance: Kino.Input.number("Current Balance (£)"),
+    bonus: Kino.Input.number("Remaining Bonus (£)", default: 500.0),
+  ],
+  submit: "Calculate"
+)
+
+Kino.render(form)
+
+# frame = Kino.Frame.new() |> Kino.render()
+
+Kino.listen(form, fn event ->
+  IO.inspect(event, label: :event)
+  %{data: %{child_name: name, balance: bal, amount_due: due, bonus: rem}} = event
+
+  # TODO: Start using Money inside Childcare code and return Money structs
+  account = Childcare.Account.new(due: due, bal: bal, rem: rem) |> IO.inspect()
+
+  # FIXME: If you try to use Money.new in the Markdown or IO.puts it doesn't render
+  {min_pay, _} = Childcare.Account.PayInRecommender.suggest_pay_in(account, strat: :min_pay) |> IO.inspect()
+  {max_pay, _} = Childcare.Account.PayInRecommender.suggest_pay_in(account, strat: :max_bonus) |> IO.inspect()
+
+  md = Kino.Markdown.new("""
+  ### Results for #{name}
+
+  | Description          | Amount  |
+  |----------------------|------------:|
+  | Amount Due           | #{%Money{amount: due * 100, currency: :GBP}}     |
+  | Current Balance      | #{%Money{amount: bal * 100, currency: :GBP}}     |
+  | Remaining Bonus      | #{%Money{amount: rem * 100, currency: :GBP}}     |
+  | Minimum Payment      | #{%Money{amount: min_pay * 100, currency: :GBP}} |
+  | Max Bonus Payment    | #{%Money{amount: max_pay * 100, currency: :GBP}} |
+  """)
+  Kino.render(md) # FIXME: Doesn't always render. And sometimes it appends instead of overwriting.
+  # Kino.Frame.render(frame, md) # Overwrite the render frame, but doesn't always render. 
+  IEx.Helpers.flush()
+end)
+
+# Can also listen in a separate process (cell), e.g.:
+# Kino.Control.subscribe(form, :input_form)
+# receive do
+#   {:input_form, event} -> IO.puts("Submitted: #{inspect(event)}")
+# end
+
+
+```
