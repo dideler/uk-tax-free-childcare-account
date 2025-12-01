@@ -20,7 +20,7 @@ defmodule Childcare.Account.PayInRecommender do
     {0.0, acct}
   end
 
-  def suggest_pay_in(%Account{due: due, bal: balance, rem: +0.0} = acct, _opts) do
+  def suggest_pay_in(%Account{due: due, bal: balance, rem: rem} = acct, _opts) when rem == 0 do
     pay_in = due - balance
     account = Map.update(acct, :bal, balance, &(&1 + pay_in))
     {pay_in, account}
