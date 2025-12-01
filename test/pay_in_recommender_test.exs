@@ -49,4 +49,26 @@ defmodule PayInRecommenderTest do
       assert {150.0, account_v2} == Recommender.suggest_pay_in(account_v1, opts)
     end
   end
+
+  describe "suggest_pay_in/2 edge cases" do
+    test "does not introduce rounding errors with min_pay strategy" do
+      account = Account.new(due: 906.1, bal: 209.52, rem: 290.48, rat: {8, 2})
+
+      {_pay_in, updated_account} =
+        Recommender.suggest_pay_in(account, strat: :min_pay)
+
+      assert updated_account.rem == 152.48
+    end
+
+    @tag timeout: 1_000
+    test "does not hang with min_pay strategy when remaining bonus is zero" do
+      account = Account.new(due: 838.1, bal: 755.81, rem: 0, rat: {8, 2})
+
+      {pay_in, updated_account} =
+        Recommender.suggest_pay_in(account, strat: :min_pay)
+
+      assert pay_in == 82.29
+      assert updated_account.bal == 838.1
+    end
+  end
 end
