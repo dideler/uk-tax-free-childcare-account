@@ -14,7 +14,6 @@ The user must enter the amount due, account balance, the remaining eligible bonu
 These figures will be available on your [childcare accounts](https://www.gov.uk/sign-in-childcare-account).
 
 ### TODO
-- Move to a livebook with kino ui
 - Use safer money representation (money dep or build own module as a fun exercise)
   - See if it fixes this edge case rounding
   ```
@@ -40,10 +39,7 @@ These figures will be available on your [childcare accounts](https://www.gov.uk/
   # gets stuck with high cpu
   ```
 - Add support for multiple dues
-- Add a basic frontend
-  - Kino for Livebook
-  - https://github.com/livebook-dev/kino
-  - https://gist.github.com/hugobarauna/018e1e487499249090bb30ed985eb764
+- Add support for getting max bonus when balance is already high enough to cover dues when using max_pay strategy
 
 ### Example usage
 
