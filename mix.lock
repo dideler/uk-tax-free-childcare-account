@@ -1,3 +1,3 @@
 %{
-  "money_ex": {:hex, :money_ex, "0.1.1", "5450132f5c8b1165d0f216c4ddc669305c2fd798e32f77290e805a620d83d07a", [:mix], [], "hexpm", "d522fde352f8d207d029e6962225681861e0cb25f75ef1a6ffde24218dcedccf"},
+  "money_ex": {:hex, :money_ex, "0.2.0", "3deedb9c4677b165c88063701511b11f47623ed1aadb5d2f24ae9d4829ea78ec", [:mix], [], "hexpm", "9c61961da3461a09fc9064196365a3b9cc3a1557b2f1d7fb21224f2a6dd98bd9"},
 }

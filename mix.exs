@@ -21,7 +21,7 @@ defmodule UkTaxFreeChildcare.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:money_ex, "~> 0.1.1"}
+      {:money_ex, "~> 0.2.0"}
     ]
   end
 end
